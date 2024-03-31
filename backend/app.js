@@ -9,6 +9,8 @@ const cookieParser = require("cookie-parser");
 const errorHandler= require("./middleware/error");
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
+const jobTypeRoute = require('./routes/jobsTypeRoutes')
+const jobRoute = require('./routes/jobsRoutes')
  
 
 
@@ -38,6 +40,8 @@ app.use(cors());
 // })
 app.use('/',authRoutes);
 app.use('/',userRoutes);
+app.use('/',jobTypeRoute);
+app.use('/',jobRoute);
 
 app.use(errorHandler);
 
