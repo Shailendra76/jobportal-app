@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { Box } from '@mui/system'
 import React from 'react'
 import headerImage from '../images/jobbg.jpg'
+import SearchInputEl from './SearchInputEl'
 
 
 // Define the styled component outside the functional component
@@ -24,6 +25,7 @@ const Header = () => {
             display:"flex",
             justifyContent:"center",
             minHeight:400,
+            alignItems:'center',
             backgroundImage:`url(${headerImage})`,
             backgroundSize:"cover",
             backgroundPosition:"center",
@@ -34,7 +36,7 @@ const Header = () => {
     return (
         <>
             <StyledHeader>
-
+             <SearchInputEl/>
             </StyledHeader>
         </>
     )

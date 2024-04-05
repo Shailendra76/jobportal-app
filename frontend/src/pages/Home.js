@@ -2,17 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../component/Navbar'
 import Header from '../component/Header'
-import { Box, Card, Container,  Stack, Pagination, Typography} from '@mui/material'
+import { Box, Card, Container, ListItemIcon, MenuItem, MenuList, Pagination, Stack, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { jobLoadAction } from '../redux/actions/jobAction'
 import { jobTypeLoadAction } from '../redux/actions/jobTypeAction'
-import { useParams } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
 import SelectComponent from '../component/SelectComponent'
 import CardElement from '../component/CardElement'
 import Footer from '../component/Footer'
 import LoadingBox from '../component/LoadingBox'
-
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 
 
@@ -59,6 +59,30 @@ const {jobs, setUniqueLocation, pages, loading} = useSelector(state=>state.loadJ
                                
                              <SelectComponent handleChangeCategory ={handleChangeCategory} cat ={cat}/>
                              
+                            </Card>
+
+                            <Card sx={{ minWidth: 150, mb: 3, mt: 3, p: 2, bgcolor: palette.primary.white }}>
+                                <Box sx={{ pb: 2 }}>
+                                    {/* <h4>Filter by category</h4> */}
+                                    <Typography component="h4" sx={{ color: palette.secondary.main, fontWeight: 600 }}>
+                                        Filter job by location
+                                    </Typography>
+                                    <MenuList>
+                                        {
+                                            setUniqueLocation && setUniqueLocation.map((location, i) => (
+                                                <MenuItem key={i}>
+                                                    <ListItemIcon>
+                                                        <LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} />
+                                                    </ListItemIcon>
+                                                    <Link style={{ color: palette.secondary.main }} to={`/search/location/${location}`}>{location}</Link>
+                                                </MenuItem>
+
+                                            ))
+                                        }
+
+                                    </MenuList>
+
+                                </Box>
                             </Card>
                             
                         </Box>
