@@ -52,7 +52,7 @@ export const userSignUpAction = (user) => async (dispatch) => {
             type: USER_SIGNUP_SUCCESS,
             payload: data
         });
-        toast.success("Register Successfully!");
+       alert("Register Successfully!");
     } catch (error) {
         dispatch({
             type: USER_SIGNUP_FAIL,
@@ -72,7 +72,7 @@ export const userLogoutAction = () => async (dispatch) => {
             type: USER_LOGOUT_SUCCESS,
             payload: data
         });
-        toast.success("Log out successfully!");
+        alert("Log out successfully!");
     } catch (error) {
         dispatch({
             type: USER_LOGOUT_FAIL,
@@ -130,12 +130,12 @@ export const userApplyJobAction = (job) => async (dispatch) => {
             type: USER_APPLY_JOB_SUCCESS,
             payload: data
         });
-        toast.success("Apply Successfully for this Job!");
+        alert("Apply Successfully for this Job!");
     } catch (error) {
         dispatch({
             type: USER_APPLY_JOB_FAIL,
             payload: error.response.data.error
         });
-        toast.error(error.response.data.error);
+        alert(error.response.data.error);
     }
 }
