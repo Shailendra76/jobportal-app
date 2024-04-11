@@ -13,6 +13,12 @@ import {
     USER_LOGOUT_FAIL,
     USER_LOGOUT_REQUEST,
     USER_LOGOUT_SUCCESS,
+    USER_PASS_RESE_FAIL,
+    USER_PASS_RESE_REQUEST,
+    USER_PASS_RESE_SUCCESS,
+    USER_PASS_RES_FAIL,
+    USER_PASS_RES_REQUEST,
+    USER_PASS_RES_SUCCESS,
     USER_SIGNIN_FAIL,
     USER_SIGNIN_REQUEST,
     USER_SIGNIN_SUCCESS,
@@ -38,7 +44,7 @@ export const userSignInAction = (user) => async (dispatch) => {
             type: USER_SIGNIN_FAIL,
             payload: error.response.data.error
         });
-        toast.error(error.response.data.error);
+        alert(error.response.data.error);
     }
 }
 
@@ -134,6 +140,42 @@ export const userApplyJobAction = (job) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_APPLY_JOB_FAIL,
+            payload: error.response.data.error
+        });
+        alert(error.response.data.error);
+    }
+}
+export const userForgotPasswordAction = (user) => async (dispatch) => {
+    dispatch({ type: USER_PASS_RES_REQUEST });
+    try {
+        const { data } = await axios.post("/forgotpassword", user);
+
+        dispatch({
+            type: USER_PASS_RES_SUCCESS,
+            payload: data
+        });
+        alert("OTP has sent to your email!");
+    } catch (error) {
+        dispatch({
+            type: USER_PASS_RES_FAIL,
+            payload: error.response.data.error
+        });
+        alert(error.response.data.error);
+    }
+}
+export const userResetPasswordAction = (user) => async (dispatch) => {
+    dispatch({ type: USER_PASS_RESE_REQUEST });
+    try {
+        const { data } = await axios.post("/resetpassword", user);
+
+        dispatch({
+            type: USER_PASS_RESE_SUCCESS,
+            payload: data
+        });
+        alert("password reset successfully!");
+    } catch (error) {
+        dispatch({
+            type: USER_PASS_RESE_FAIL,
             payload: error.response.data.error
         });
         alert(error.response.data.error);

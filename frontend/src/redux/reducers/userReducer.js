@@ -22,7 +22,16 @@ USER_APPLY_JOB_SUCCESS,
 ALL_USER_LOAD_FAIL,
 ALL_USER_LOAD_REQUEST,
 ALL_USER_LOAD_RESET,
-ALL_USER_LOAD_SUCCESS} from "../constants/userConstant"
+ALL_USER_LOAD_SUCCESS,
+USER_PASS_RES_REQUEST,
+USER_PASS_RES_FAIL,
+USER_PASS_RES_RESET,
+USER_PASS_RES_SUCCESS,
+USER_PASS_RESE_REQUEST,
+USER_PASS_RESE_SUCCESS,
+USER_PASS_RESE_FAIL,
+USER_PASS_RESE_RESET,
+} from "../constants/userConstant"
 
 
 
@@ -138,4 +147,38 @@ export const allUserReducer = (state = { users: [] }, action) => {
             return state;
     }
 
+}
+export const userReducerForgotPassword = (state = {}, action) => {
+    switch (action.type) {
+        case USER_PASS_RES_REQUEST:
+            return { loading: true }
+        case USER_PASS_RES_SUCCESS:
+            return {
+                loading: false,
+                userForgotPassword: action.payload,
+            }
+        case USER_PASS_RES_FAIL:
+            return { loading: false, error: action.payload }
+        case USER_PASS_RES_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+export const userReducerResetPassword= (state = {}, action) => {
+    switch (action.type) {
+        case USER_PASS_RESE_REQUEST:
+            return { loading: true }
+        case USER_PASS_RESE_SUCCESS:
+            return {
+                loading: false,
+                userForgotPassword: action.payload,
+            }
+        case USER_PASS_RESE_FAIL:
+            return { loading: false, error: action.payload }
+        case USER_PASS_RESE_RESET:
+            return {}
+        default:
+            return state;
+    }
 }

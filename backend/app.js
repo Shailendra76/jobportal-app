@@ -11,6 +11,7 @@ const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
+
  
 
 
@@ -23,6 +24,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/jobportal",{
 .then(() => 
 console.log("connection sucessful"))
 .catch((e) => console.log(e));
+
+
 
 // MIDDLEWARE
 app.use(morgan('dev'));
@@ -43,6 +46,7 @@ app.use('/',userRoutes);
 app.use('/',jobTypeRoute);
 app.use('/',jobRoute);
 
+
 app.use(errorHandler);
 
 const port = process.env.PORT || 8000
@@ -50,3 +54,5 @@ const port = process.env.PORT || 8000
 app.listen(port,()=>{
     console.log(`connected at  ${port}`)
 });
+
+

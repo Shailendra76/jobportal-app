@@ -5,7 +5,7 @@ import NotFound from './pages/NotFound';
 import {CssBaseline,ThemeProvider} from '@mui/material';
 import {ToastContainer} from 'react-toastify';
 import { ProSidebarProvider } from 'react-pro-sidebar';
-import { theme } from './theme';
+//import { theme } from './theme';
 import LogIn from './pages/LogIn';
 import UserDashboard from './pages/user/UserDashboard';
 import UserRoute from './component/UserRoute';
@@ -22,6 +22,13 @@ import DashEditJob from './pages/admin/DashEditJob';
 import DashCreateCategory from './pages/admin/DashCreateCategory';
 import DashCategory from './pages/admin/DashCategory';
 import Register from './pages/Register';
+import { createTheme } from '@mui/material/styles';
+import { themeColors } from './theme'
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
 const UserInfoDashboardHOC = Layout(UserInfoDashboard);
@@ -34,7 +41,12 @@ const DashCreateCategoryHOC = Layout(DashCreateCategory);
 const DashCategoryHOC = Layout(DashCategory);
 
 
+
+
+
 const App = () => {
+    const { mode } = useSelector((state) => state.mode);
+    const theme = useMemo(() => createTheme(themeColors(mode)), [mode]);
     return (
         <>
      <ToastContainer/>
@@ -48,7 +60,10 @@ const App = () => {
                     <Route path='/search/location/:location' element={<Home />} />
                     <Route path='/search/:keyword' element={<Home />} />
                     <Route path='/login' element={<LogIn />} />
+                    <Route path='/forgotpassword' element={<ForgotPassword />} />
+                    <Route path='/resetpassword' element={<ResetPassword />} />
                     <Route path='/register' element={<Register />} />
+
                     <Route path='/job/:id' element={<SingleJob/>} />
                     <Route path='/user/dashboard' element={<UserRoute><UserDashboardHOC /></UserRoute>} />
                     <Route path='/user/jobs' element={<UserRoute>< UserJobsHistoryHOC /></UserRoute>} />

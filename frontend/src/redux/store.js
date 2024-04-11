@@ -5,7 +5,10 @@ import { deleteJobReducer, loadJobReducer, loadJobSingleReducer, registerAjobRed
 import { createJobTypeReducer, loadJobTypeReducer } from './reducers/jobTypeReducer';
 
 
-import { allUserReducer, userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn, userReducerSignUp } from './reducers/userReducer';
+import { allUserReducer, userApplyJobReducer, userReducerForgotPassword, userReducerLogout, userReducerProfile, userReducerResetPassword, userReducerSignIn, userReducerSignUp } from './reducers/userReducer';
+//import { THEME_MODE } from './constants/themeConstant';
+import { modeReducer } from './reducers/themeModeReducer';
+
 
 
 const reducer = combineReducers({
@@ -21,8 +24,10 @@ const reducer = combineReducers({
     deleteJob: deleteJobReducer,
     createJobType: createJobTypeReducer,
     updateJob: updateJobReducer,
-    signUp: userReducerSignUp
-    
+    signUp: userReducerSignUp,
+    mode: modeReducer,
+    forgotPassword:userReducerForgotPassword,
+    resetPassword:userReducerResetPassword
 
 });
 let initialState = {
