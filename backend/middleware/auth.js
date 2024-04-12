@@ -5,6 +5,9 @@ const User = require("../models/userModels"); // Change user to User
 // is user authenticated
 exports.isAuthenticated = async (req, res, next) => {
     const { token } = req.cookies;
+    
+    
+   
 
     // Make sure token exists
     if (!token) {
@@ -14,12 +17,15 @@ exports.isAuthenticated = async (req, res, next) => {
     try {
         // Verify token
         const decoded = jwt.verify(token,`${process.env.JWT_SECRET}` );
+        
+
         req.user = await User.findById(decoded.id);
+     
        
         next();
 
     } catch (error) {
-        return next(new ErrorResponse('You must log in!', 401));
+        return next(new ErrorResponse('You must log in...!', 401));
     }
 }
 //middleware for admin

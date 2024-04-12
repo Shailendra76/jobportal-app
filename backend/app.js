@@ -16,13 +16,16 @@ const jobRoute = require('./routes/jobsRoutes')
 
 
 // database connection
-mongoose.connect("mongodb://127.0.0.1:27017/jobportal",{
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex:true   
+mongoose.connect(process.env.MONGO_URI,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true
 })
-.then(() => 
-console.log("connection sucessful"))
+.then(() => {
+    app.listen(process.env.PORT,()=>{
+console.log("connection sucessful")
+    })
+})
 .catch((e) => console.log(e));
 
 
@@ -49,10 +52,8 @@ app.use('/',jobRoute);
 
 app.use(errorHandler);
 
-const port = process.env.PORT || 8000
 
-app.listen(port,()=>{
-    console.log(`connected at  ${port}`)
-});
+
+
 
 
