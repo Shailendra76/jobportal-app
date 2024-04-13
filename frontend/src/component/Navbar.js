@@ -48,7 +48,7 @@ const Navbar = () => {
             case 'Home':
                 navigate('/');
                 break;
-            case 'Login':
+            case 'Log In':
                 navigate('/login');
                 break;
             case 'Register':
