@@ -43,7 +43,7 @@ export const themeColors = (mode) => ({
                     default: "#1e1e1e",
                 },
                 text: {
-                    primary: '#fff',
+                    primary: '#000',
                     secondary: grey[500],
                 },
             }),

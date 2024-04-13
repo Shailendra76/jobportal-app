@@ -1,32 +1,19 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import WorkIcon from '@mui/icons-material/Work';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@emotion/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { AppBar, Box, Container, Toolbar, IconButton, Typography, Menu, MenuItem, Avatar, Button, Tooltip } from '@mui/material';
+import { DarkMode, LightMode, Menu as MenuIcon, Work as WorkIcon } from "@mui/icons-material";
 import { userLogoutAction } from '../redux/actions/userAction';
-import { DarkMode, LightMode } from "@mui/icons-material";
 import { toggleActionTheme } from '../redux/actions/themeAction';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
-const pages = ['Home', 'Log In'];
-
+const pages = ['Home', 'Log In', 'Register'];
 
 const Navbar = () => {
     //show / hide button
     const { userInfo } = useSelector(state => state.signIn);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { palette } = useTheme();
@@ -56,13 +43,31 @@ const Navbar = () => {
             navigate('/');
         }, 500)
     }
+    const handlePageClick = (page) => {
+        switch (page) {
+            case 'Home':
+                navigate('/');
+                break;
+            case 'Login':
+                navigate('/login');
+                break;
+            case 'Register':
+                navigate('/register');
+                break;
+            default:
+                break;
+        }
+    };
 
-
+    
+    
+    
+    // Check if the screen size is less than or equal to 'md'
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     return (
         <AppBar position="static" sx={{ bgcolor: palette.primary.main }}>
             <Container >
-                {/* principal Menu */}
                 <Toolbar disableGutters>
                     <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
@@ -113,7 +118,7 @@ const Navbar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={() => handlePageClick(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -139,24 +144,20 @@ const Navbar = () => {
                         JOB PORTAL
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {/* menu desktop */}
-
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                Home
-                            </Link>
-                        </Button>
-                        <Button
-                            onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/register" style={{ color: 'white', textDecoration: "none" }}>
-                                Register
-                            </Link>
-                        </Button>
-
-
+                        {isMobile ? null : (
+                            <>
+                                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                                    <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                                        Home
+                                    </Link>
+                                </Button>
+                                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                                    <Link to="/register" style={{ color: 'white', textDecoration: "none" }}>
+                                        Register
+                                    </Link>
+                                </Button>
+                            </>
+                        )}
                     </Box>
                     <IconButton sx={{ mr: 4 }} onClick={() => dispatch(toggleActionTheme())}>
                         {palette.mode === "dark" ? (
@@ -165,7 +166,6 @@ const Navbar = () => {
                             <LightMode sx={{ color: "#ffffff", fontSize: "25px" }} />
                         )}
                     </IconButton>
-
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -181,7 +181,6 @@ const Navbar = () => {
                                     },
                                 }
                             }}
-
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
@@ -197,8 +196,6 @@ const Navbar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-
-
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
                             </MenuItem>
@@ -206,22 +203,16 @@ const Navbar = () => {
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/forgotpassword">forgot password</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/forgotpassword">Forgot Password</Link></Typography>
                             </MenuItem>
-
-                            {
-                                !userInfo ?
-
-                                    <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/login">Log In</Link></Typography>
-                                    </MenuItem> :
-
-                                    <MenuItem onClick={logOutUser}>
-                                        <Typography style={{ textDecoration: "none", color: palette.secondary.main }} textAlign="center">Log Out</Typography>
-                                    </MenuItem>
+                            {!userInfo ?
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/login">Log In</Link></Typography>
+                                </MenuItem> :
+                                <MenuItem onClick={logOutUser}>
+                                    <Typography style={{ textDecoration: "none", color: palette.secondary.main }} textAlign="center">Log Out</Typography>
+                                </MenuItem>
                             }
-
-
                         </Menu>
                     </Box>
                 </Toolbar>

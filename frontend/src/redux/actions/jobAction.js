@@ -34,7 +34,7 @@ import {
 export const jobLoadAction = (pageNumber, keyword = '', cat = '', location = '') => async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`http://localhost:8000/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`)
+        const { data } = await axios.get(`/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`)
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
@@ -84,7 +84,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
-        const { data } = await axios.post("http://localhost:8000/job/create", job)
+        const { data } = await axios.post("/job/create", job)
         dispatch({
             type: REGISTER_JOB_SUCCESS,
             payload: data
@@ -104,7 +104,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
 export const editSingleJobAction = (job) => async (dispatch) => {
     dispatch({ type: EDIT_JOB_REQUEST });
     try {
-        const { data } = await axios.put(`/job/update/${job._id}`, job);
+        const { data } = await axios.put(`https://jobportal-app-1.onrender.com/job/update/${job._id}`, job);
         dispatch({
             type: EDIT_JOB_SUCCESS,
             payload: data

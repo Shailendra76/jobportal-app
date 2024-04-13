@@ -28,8 +28,12 @@ const Header = () => {
             alignItems:'center',
             backgroundImage:`url(${headerImage})`,
             backgroundSize:"cover",
-            backgroundPosition:"center",
-            backgroundColor:theme.palette.secondary.main
+            backgroundPosition:"center center",
+            backgroundColor:theme.palette.secondary.main,
+            '@media (max-width: 768px)': {
+                minHeight: 200,
+                backgroundSize: "cover"
+            }
         
         }
         ));
