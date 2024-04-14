@@ -104,7 +104,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
 export const editSingleJobAction = (job) => async (dispatch) => {
     dispatch({ type: EDIT_JOB_REQUEST });
     try {
-        const { data } = await axios.put(`https://jobportal-app-1.onrender.com/job/update/${job._id}`, job);
+        const { data } = await axios.put(`/job/update/${job._id}`, job);
         dispatch({
             type: EDIT_JOB_SUCCESS,
             payload: data

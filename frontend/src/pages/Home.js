@@ -37,7 +37,7 @@ const {jobs, setUniqueLocation, pages, loading} = useSelector(state=>state.loadJ
 }
     return (
         <>
-            <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh" }}>
+            <Box sx={{ bgcolor:palette.primary.card , minHeight: "100vh" }}>
 
                 <Navbar />
                 <Header />

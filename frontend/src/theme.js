@@ -22,25 +22,32 @@ export const themeColors = (mode) => ({
                 // palette values for light mode
                 primary: {
                     main: blue[500],
-                    white: "#fff"
+                    white: "#fff",
+                    foo:"#fff",
+                    foo1:"#0f171e",
+                    card:"#fff"
                 },
                 secondary: {
                     main: lightBlue[800],
                     midNightBlue: "#003366"
+
                 },
+               
             }
             : {
                 // palette values for dark mode
                 primary: {
                     main: "#003366",
-                    white: "#003366"
+                    white: "#003366",
+                    foo:"#fff",
+                    card:"#9d8e90"
                 },
                 secondary: {
                     main: blue[500],
                     midNightBlue: "#2196f3"
                 },
                 background: {
-                    default: "#1e1e1e",
+                    default: "#0f171e"
                 },
                 text: {
                     primary: '#000',

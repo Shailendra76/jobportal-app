@@ -34,7 +34,7 @@ const SingleJob = () => {
     return (
         <>
 
-            <Box sx={{ bgcolor: "#fafafa" }}>
+            <Box sx={{ bgcolor: palette.primary.card }}>
 
                 <Navbar />
                 <Box sx={{ height: 'calc(100vh - 140px)' }}>
