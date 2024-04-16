@@ -25,7 +25,8 @@ export const themeColors = (mode) => ({
                     white: "#fff",
                     foo:"black",
                     foo1:"#0f171e",
-                    card:"#fff"
+                    card:"#fff",
+                    sing:"#fff"
                 },
                 secondary: {
                     main: lightBlue[800],
@@ -40,7 +41,8 @@ export const themeColors = (mode) => ({
                     main: "#003366",
                     white: "#003366",
                     foo:"#fff",
-                    card:"#9d8e90"
+                    card:"rgb(59 60 68 / 87%)",
+                    sing:"#0f171e"
                 },
                 secondary: {
                     main: blue[500],

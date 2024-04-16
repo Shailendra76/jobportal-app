@@ -39,10 +39,10 @@ const SearchInputEl = () => {
     return (
 
         <form onSubmit={handleSubmit} style={{ width: '50%' }}>
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center',mt:-20 ,}}>
                 {/* <Search> */}
 
-                <InputBase sx={{ bgcolor: 'white', padding: '10px', color: "rgba(0, 0, 0, 0.9)" }}
+                <InputBase sx={{ bgcolor: 'lightblue', padding: '10px', color: "rgba(0, 0, 0, 0.9)" }}
                     fullWidth={true}
                     id="search"
                     name="search"

@@ -100,6 +100,7 @@ const Navbar = () => {
                             <MenuIcon />
                         </IconButton>
                         <Menu
+                            
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
