@@ -1,3 +1,4 @@
+
 import { Box, Divider, IconButton, Stack } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
@@ -33,7 +34,7 @@ const Footer = () => {
     position: 'relative',
     padding: '30px 0', // Added padding at the top and bottom
 }}>
-    <Box component='span' sx={{ color: palette.primary.main ,fontSize: '1.5rem', fontWeight: 'bold', zIndex: 1, mb: 2 }}>
+    <Box component='span' sx={{ color: palette.primary.foo ,fontSize: '1.5rem', fontWeight: 'bold', zIndex: 1, mb: 2 }}>
         Job Portal {/* Added mb: 2 for margin bottom */}
     </Box>
     <Stack direction="row" spacing={2} sx={{ 

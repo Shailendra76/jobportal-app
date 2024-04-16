@@ -23,7 +23,7 @@ export const themeColors = (mode) => ({
                 primary: {
                     main: blue[500],
                     white: "#fff",
-                    foo:"#fff",
+                    foo:"black",
                     foo1:"#0f171e",
                     card:"#fff"
                 },
