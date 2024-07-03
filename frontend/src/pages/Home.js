@@ -28,8 +28,8 @@ const {jobs, setUniqueLocation, pages, loading} = useSelector(state=>state.loadJ
        dispatch(jobLoadAction(page, keyword , cat , location ));
    },[page, keyword , cat , location,dispatch]);
    useEffect(()=>{
-       dispatch(jobTypeLoadAction( ));
-   },[dispatch]);
+       dispatch(jobTypeLoadAction(page, keyword , cat , location ));
+   },[page, keyword , cat , location,dispatch]);
    const handleChangeCategory = (e) => {
     const selectedCategory = e.target.value;
     setCat(selectedCategory);
