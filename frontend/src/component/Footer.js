@@ -11,12 +11,10 @@ import { useNavigate } from 'react-router-dom';
 const Footer = () => {
     const { palette } = useTheme();
     const navigate = useNavigate();
-
     const navigateTo = (url) => {
-        const urlObject = new URL(url);
-        const domain = urlObject.hostname;
-        window.open(`https://${domain}`, '_blank');
+        window.location.href = url;
     };
+    
     
 
     return (
@@ -55,7 +53,7 @@ const Footer = () => {
         <IconButton onClick={() => navigateTo('https://www.facebook.com/shailendra.varma.3532507')}>
             <FacebookIcon />
         </IconButton>
-        <IconButton onClick={() => navigateTo('https://twitter.com/SkVarma30984783')}>
+        <IconButton onClick={() => navigateTo(' https://in.linkedin.com/in/naman-kumar-dubey-963792223')}>
             <TwitterIcon />
         </IconButton>
     </Stack>
