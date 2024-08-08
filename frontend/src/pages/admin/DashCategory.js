@@ -84,7 +84,7 @@ const DashCategory = () => {
                             '& .MuiTablePagination-displayedRows': {
                                 color: 'white',
                             },
-                            color: 'black',
+                            color: 'lightblue',
                             [`& .${gridClasses.row}`]: {
                                 bgcolor: (theme) =>
                                     // theme.palette.mode === 'light' ? grey[200] : grey[900],

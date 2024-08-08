@@ -26,7 +26,8 @@ export const themeColors = (mode) => ({
                     foo:"black",
                     foo1:"#0f171e",
                     card:"#fff",
-                    sing:"#fff"
+                    sing:"#fff",
+                    filt:"#fff"
                 },
                 secondary: {
                     main: lightBlue[800],
@@ -38,6 +39,7 @@ export const themeColors = (mode) => ({
             : {
                 // palette values for dark mode
                 primary: {
+                     filt:"#fff",
                     main: "#003366",
                     white: "#003366",
                     foo:"#fff",

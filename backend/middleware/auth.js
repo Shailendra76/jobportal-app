@@ -1,4 +1,5 @@
 const ErrorResponse = require('../utils/errorResponse');
+const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const User = require("../models/userModels"); // Change user to User
 
@@ -35,3 +36,30 @@ exports.isAdmin = (req,res,next)=>{
     }
     next();
 }
+exports.protect = asyncHandler(async (req, res, next) => {
+    let token;
+
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        try {
+            // Get the token from the header
+            token = req.headers.authorization.split(' ')[1];
+
+            // Verify the token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            // Find the user by ID and attach it to the request object
+            req.user = await User.findById(decoded.id).select('-password');
+
+            next();
+        } catch (error) {
+            return next(new ErrorResponse('Not authorized, token failed', 401));
+        }
+    }
+
+    if (!token) {
+        return next(new ErrorResponse('Not authorized, no token provided', 401));
+    }
+});

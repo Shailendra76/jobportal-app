@@ -111,9 +111,9 @@ const DashJobs = () => {
                         sx={{
 
                             '& .MuiTablePagination-displayedRows': {
-                                color: 'midNightBlue',
+                                color: 'white',
                             },
-                            color: 'black',
+                            color: 'lightblue',
                             [`& .${gridClasses.row}`]: {
                                 bgcolor: (theme) =>
                                     // theme.palette.mode === 'light' ? grey[200] : grey[900],

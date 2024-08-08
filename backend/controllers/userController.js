@@ -67,18 +67,19 @@ exports.deleteUser = async (req,res,next)=>{
     } 
 }
 exports.createUserJobsHistory = async (req, res, next) => {
-    const { title, description, salary, location } = req.body;
+    const { title, description, salary, location, status = 'pending' } = req.body;
 
     try {
         const currentUser = await User.findOne({ _id: req.user._id });
         if (!currentUser) {
-            return next(new ErrorResponse("You must log In", 401));
+            return next(new ErrorResponse("You must log in", 401));
         } else {
             const addJobHistory = {
                 title,
                 description,
                 salary,
                 location,
+                status, // Add the status field
                 user: req.user._id
             }
             currentUser.jobsHistory.push(addJobHistory);
@@ -88,10 +89,42 @@ exports.createUserJobsHistory = async (req, res, next) => {
         res.status(200).json({
             success: true,
             currentUser
-        })
+        });
         next();
 
     } catch (error) {
         return next(error);
     }
 }
+exports.updateUserJobStatus = async (req, res, next) => {
+    try {
+        const { userId, jobId } = req.params;
+        const { status } = req.body;
+
+        // Find the user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(new ErrorResponse("User not found", 404));
+        }
+
+        // Find the specific job history entry by its ID
+        const jobHistory = user.jobsHistory.id(jobId);
+        if (!jobHistory) {
+            return next(new ErrorResponse("Job history not found", 404));
+        }
+
+        // Update the status
+        jobHistory.status = status;
+
+        // Save the updated user document
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: `Job status updated to ${status}`,
+            jobHistory
+        });
+    } catch (error) {
+        return next(error);
+    }
+};

@@ -28,6 +28,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import DashUserJobStatus from './pages/admin/DashUserJobStatus';
 
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
@@ -39,6 +40,7 @@ const DashCreateJobHOC = Layout(DashCreateJob);
 const DashAdminEditJobHOC = Layout(DashEditJob);
 const DashCreateCategoryHOC = Layout(DashCreateCategory);
 const DashCategoryHOC = Layout(DashCategory);
+const DashUserJobStatusHOC = Layout(DashUserJobStatus);
 
 
 
@@ -70,6 +72,7 @@ const App = () => {
                     <Route path='/user/info' element={<UserRoute>< UserInfoDashboardHOC /></UserRoute>} />
                     <Route path='/admin/users' element={<AdminRoute><DashUsersHOC/></AdminRoute>} />
                     <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardHOC/></AdminRoute>} />
+                    <Route path='/profile' element={<AdminRoute><DashUserJobStatusHOC/></AdminRoute>} />
                     <Route path='/admin/jobs' element={<AdminRoute><DashJobsHOC/></AdminRoute>} />
                     <Route path='/admin/job/create' element={<AdminRoute><DashCreateJobHOC /></AdminRoute>} />
                     <Route path='/admin/edit/job/:id' element={<AdminRoute><DashAdminEditJobHOC /></AdminRoute>} />
