@@ -18,7 +18,7 @@ const DashUserJobStatus = () => {
     }, []);
 
 
-    const { app, loading } = useSelector(state => state.apps);
+    const { app=[], loading } = useSelector(state => state.apps);
     let data = [];
     data = (app !== undefined && app.length > 0) ? app : []
 
