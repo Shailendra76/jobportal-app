@@ -8,7 +8,7 @@ const sendOTP = async (email, otp) => {
     service: 'gmail',
     auth: {
       user: 'vsk60419@gmail.com', // Your email address
-      pass: 'tfoxauwzpmxupbxd' // Your email password
+      pass: 'kmcscndezmfvmsbw' // Your email password
     },
   });
 
