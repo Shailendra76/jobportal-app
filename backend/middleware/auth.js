@@ -7,8 +7,8 @@ const User = require("../models/userModels"); // Change user to User
 exports.isAuthenticated = async (req, res, next) => {
      const { token } = req.cookies;
     
-    
-   
+    console.log(token);
+
 
     // Make sure token exists
     if (!token) {
