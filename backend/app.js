@@ -13,7 +13,7 @@ const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
 
 const corsOptions = {
-    origin: 'https://demo-pi-rosy.vercel.app', 
+    origin: 'https://newdemo-ruby.vercel.app', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: '*', // Allows all headers
     credentials: true 
