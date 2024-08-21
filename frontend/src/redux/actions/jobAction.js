@@ -34,7 +34,7 @@ const base_url="https://jobportal-app-1.onrender.com/"
 export const jobLoadAction = (pageNumber, keyword = '', cat = '', location = '') => async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
+        const { data } = await axios.get(`${base_url}/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
