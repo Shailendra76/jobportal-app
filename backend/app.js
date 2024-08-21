@@ -12,7 +12,15 @@ const userRoutes = require('./routes/userRoutes')
 const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
 
- 
+const corsOptions = {
+    origin: 'https://demo-mqbl57ism-shailendras-projects-cc694aed.vercel.app', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: '*', // Allows all headers
+    credentials: true 
+};
+
+app.use(cors(corsOptions));
+
 
 
 // database connection
