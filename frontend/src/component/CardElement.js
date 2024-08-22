@@ -121,16 +121,16 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
         <Card sx={{ ...style }}>
             <CardContent>
                 <Typography sx={{ fontSize: 15, color: palette.secondary.main, fontWeight: 500 }} gutterBottom>
-                    <IconButton><LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} /></IconButton> {capitalizeWords(location)}
+                    <IconButton><LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} /></IconButton> {location}
                 </Typography>
                 <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: palette.primary.main }}>
-                    {capitalizeWords(jobTitle)}
+                    {jobTitle}
                 </Typography>
                 <Typography sx={{ mb: 1.5, fontSize: 16, color: palette.info.main, fontWeight: 600 }}>
-                    {capitalizeWords(category)}
+                    {category}
                 </Typography>
                 <Typography variant="body2" sx={{ fontSize: 14, color: palette.text.primary, lineHeight: 1.6 }}>
-                    <span style={{ fontWeight: 'bold', color: palette.primary.dark }}>Description:</span> {description ? capitalizeWords(description.split(" ").slice(0, 15).join(" ") + "...") : ""}
+                    <span style={{ fontWeight: 'bold', color: palette.primary.dark }}>Description:</span> {description ? description.split(" ").slice(0, 15).join(" ") + "..." : ""}
                 </Typography>
             </CardContent>
             <CardActions>

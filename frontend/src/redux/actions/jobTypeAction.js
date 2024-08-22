@@ -1,6 +1,7 @@
 
 import axios from 'axios';
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import { JOB_TYPE_LOAD_FAIL,
 JOB_TYPE_LOAD_REQUEST,
 JOB_TYPE_LOAD_SUCCESS ,
@@ -38,7 +39,16 @@ export const createJobTypeAction = (jobtype) => async (dispatch) => {
             type: CREATE_JOB_TYPE_SUCCESS,
             payload: data
         })
-       alert("Job type created successfully");
+        toast.success("Job type created successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        icon: '🚀' // Customize the icon or remove it by setting icon to false
+      });
 
 
     } catch (error) {

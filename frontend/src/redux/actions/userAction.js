@@ -38,7 +38,16 @@ export const userSignInAction = (user) => async (dispatch) => {
             type: USER_SIGNIN_SUCCESS,
             payload: data
         });
-        alert("Login Successfully!");
+        toast.success("Login Successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: USER_SIGNIN_FAIL,
@@ -58,7 +67,16 @@ export const userSignUpAction = (user) => async (dispatch) => {
             type: USER_SIGNUP_SUCCESS,
             payload: data
         });
-       alert("Register Successfully!");
+        toast.success("Register Successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        icon: '🚀' // Customize the icon or remove it by setting icon to false
+      });
     } catch (error) {
         dispatch({
             type: USER_SIGNUP_FAIL,
@@ -78,7 +96,16 @@ export const userLogoutAction = () => async (dispatch) => {
             type: USER_LOGOUT_SUCCESS,
             payload: data
         });
-        alert("Log out successfully!");
+        toast.success("Log out successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: USER_LOGOUT_FAIL,
@@ -154,7 +181,16 @@ export const userForgotPasswordAction = (user) => async (dispatch) => {
             type: USER_PASS_RES_SUCCESS,
             payload: data
         });
-        alert("OTP has sent to your email!");
+        toast.success("OTP has sent to your email!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: USER_PASS_RES_FAIL,
@@ -172,7 +208,16 @@ export const userResetPasswordAction = (user) => async (dispatch) => {
             type: USER_PASS_RESE_SUCCESS,
             payload: data
         });
-        alert("password reset successfully!");
+        toast.success("password reset successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: USER_PASS_RESE_FAIL,

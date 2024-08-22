@@ -1,6 +1,8 @@
 
 import axios from 'axios';
-// import { toast } from 'react-toastify'
+ import { toast } from 'react-toastify'
+ import 'react-toastify/dist/ReactToastify.css';
+ 
 import {
    
     JOB_LOAD_FAIL,
@@ -34,7 +36,7 @@ const base_url="https://jobportal-app-1.onrender.com/"
 export const jobLoadAction = (pageNumber, keyword = '', cat = '', location = '') => async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`${base_url}/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
+        const { data } = await axios.get(`/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
@@ -71,7 +73,16 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
             type: DELETE_JOB_SUCCESS,
             payload: data
         });
-        alert("Job deleted successfully");
+        toast.success("Job deleted successfully", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: DELETE_JOB_FAIL,
@@ -89,7 +100,16 @@ export const registerAjobAction = (job) => async (dispatch) => {
             type: REGISTER_JOB_SUCCESS,
             payload: data
         })
-        alert("Job created successfully");
+        toast.success("Job created successfully", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
 
     } catch (error) {
         dispatch({
@@ -109,7 +129,16 @@ export const editSingleJobAction = (job) => async (dispatch) => {
             type: EDIT_JOB_SUCCESS,
             payload: data
         });
-        alert("Job updated successfully");
+        toast.success("Job updated successfully", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            icon: '🚀' // Customize the icon or remove it by setting icon to false
+          });
     } catch (error) {
         dispatch({
             type: EDIT_JOB_FAIL,
