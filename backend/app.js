@@ -12,17 +12,17 @@ const userRoutes = require('./routes/userRoutes')
 const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
 
-const corsOptions = {
-    origin: 'https://newdemo-ruby.vercel.app', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: '*', // Allows all headers
-    credentials: true 
-};
+// const corsOptions = {
+//     origin: 'https://newdemo-ruby.vercel.app', 
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: '*', // Allows all headers
+//     credentials: true 
+// };
 
 
 
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 
