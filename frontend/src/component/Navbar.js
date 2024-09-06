@@ -3,16 +3,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@emotion/react';
 import { AppBar, Box, Container, Toolbar, IconButton, Typography, Menu, MenuItem, Avatar, Button, Tooltip } from '@mui/material';
-import { DarkMode, LightMode, Menu as MenuIcon, Work as WorkIcon } from "@mui/icons-material";
+import { DarkMode, LightMode, Menu as MenuIcon } from "@mui/icons-material";
 import { userLogoutAction } from '../redux/actions/userAction';
 import { toggleActionTheme } from '../redux/actions/themeAction';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
-
-const pages = ['Home', 'Log In', 'Register'];
+import homeIcon from '../images/home.png';
+import registerIcon from '../images/register1.png';
+import accountIcon from '../images/account.png';
+import './styles.css';
 
 const Navbar = () => {
-    //show / hide button
     const { userInfo } = useSelector(state => state.signIn);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,14 +35,13 @@ const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    // log out user
     const logOutUser = () => {
         dispatch(userLogoutAction());
-        window.location.reload(true);
         setTimeout(() => {
             navigate('/');
-        }, 500)
-    }
+        }, 500);
+    };
+
     const handlePageClick = (page) => {
         switch (page) {
             case 'Home':
@@ -59,17 +58,12 @@ const Navbar = () => {
         }
     };
 
-    
-    
-    
-    // Check if the screen size is less than or equal to 'md'
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     return (
-        <AppBar position="static" sx={{ bgcolor: palette.primary.main }}>
-            <Container >
+        <AppBar position="sticky" sx={{ bgcolor:'#a491a7',height:'70px',paddingTop:'1px'}}>
+            <Container>
                 <Toolbar disableGutters>
-                    <WorkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -100,7 +94,6 @@ const Navbar = () => {
                             <MenuIcon />
                         </IconButton>
                         <Menu
-                            
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
@@ -118,48 +111,30 @@ const Navbar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
+                            {['Home', 'Log In', 'Register'].map((page) => (
                                 <MenuItem key={page} onClick={() => handlePageClick(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <WorkIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.2rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        JOB PORTAL
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {isMobile ? null : (
+
+                    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                        {!isMobile && (
                             <>
-                                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                                    <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
-                                        Home
-                                    </Link>
+                                <Button sx={{ my: 2, color: 'white', display: 'flex', alignItems: 'center' }} onClick={() => handlePageClick('Home')}>
+                                    <img src={homeIcon} alt="Home Icon" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
+                                    <Typography class="quicksand-custom">Home</Typography>
                                 </Button>
-                                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                                    <Link to="/register" style={{ color: 'white', textDecoration: "none" }}>
-                                        Register
-                                    </Link>
+
+                                <Button sx={{ my: 2, color: 'white', display: 'flex', alignItems: 'center' }} onClick={() => handlePageClick('Register')}>
+                                    <img src={registerIcon} alt="Register Icon" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
+                                    <Typography class="quicksand-custom">Register</Typography>
                                 </Button>
                             </>
                         )}
                     </Box>
+
                     <IconButton sx={{ mr: 4 }} onClick={() => dispatch(toggleActionTheme())}>
                         {palette.mode === "dark" ? (
                             <DarkMode sx={{ color: "#ffffff", fontSize: "25px" }} />
@@ -167,16 +142,17 @@ const Navbar = () => {
                             <LightMode sx={{ color: "#ffffff", fontSize: "25px" }} />
                         )}
                     </IconButton>
+
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar sx={{ color: palette.primary.white }} alt="Remy Sharp" src="" />
+                            <img src={accountIcon} alt="Home Icon" style={{ width: '28px', height: '28px', marginRight: '8px' }} />
                             </IconButton>
                         </Tooltip>
                         <Menu
                             PaperProps={{
                                 sx: {
-                                    "& 	.MuiMenu-list": {
+                                    "& .MuiMenu-list": {
                                         bgcolor: "primary.white",
                                         color: "white"
                                     },
@@ -221,4 +197,5 @@ const Navbar = () => {
         </AppBar>
     );
 }
+
 export default Navbar;

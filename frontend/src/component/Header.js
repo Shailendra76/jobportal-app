@@ -24,12 +24,14 @@ const StyledHeaderLight = styled(Box)(({ theme }) => ({
 
 // StyledHeader component for dark mode
 const StyledHeaderDark = styled(Box)(({ theme }) => ({
+    
     display: "flex",
     justifyContent: "center",
     minHeight: 400,
     alignItems: 'center',
     backgroundImage: `url(${headerImageDark})`,
     backgroundSize: "cover",
+  
     backgroundPosition: "center center",
     backgroundColor: theme.palette.grey[900], // Default background color for dark mode
     '@media (max-width: 768px)': {
