@@ -38,7 +38,9 @@ exports.singleJob = async (req, res, next) => {
 // Update job by id
 exports.updateJob = async (req, res, next) => {
     try {
-        const job = await Job.findByIdAndUpdate(req.params.job_id, req.body, { new: true }).populate('jobType', 'jobTypeName').populate('User', 'firstName lastName');
+        const job = await Job.findByIdAndUpdate(req.params.job_id, req.body, { new: true })
+            .populate('jobType', 'jobTypeName')
+            .populate('User', 'firstName lastName');
         res.status(200).json({
             success: true,
             job
@@ -64,7 +66,6 @@ exports.deleteJob = async (req, res, next) => {
 // Get jobs with filters and pagination
 exports.showJobs = async (req, res, next) => {
     try {
-        // Enable search
         const keyword = req.query.keyword ? {
             title: {
                 $regex: req.query.keyword,
@@ -72,22 +73,23 @@ exports.showJobs = async (req, res, next) => {
             }
         } : {};
 
-        // Get all category ids
         const categoryIds = (await JobType.find({}, { _id: 1 })).map(cat => cat._id);
 
-        // Filter by category ids
         const categoryId = req.query.cat || categoryIds;
 
-        // Get all locations
-        const setUniqueLocation= (await Job.find({}, { location: 1 })).map(val => val.location);
+        const setUniqueLocation = (await Job.find({}, { location: 1 })).map(val => val.location);
         const filteredLocations = req.query.location || setUniqueLocation;
 
-        // Enable pagination
-        const pageSize = 5;
-        const page = Number(req.query.pageNumber) || 1;
-        const count = await Job.find({ ...keyword, jobType: categoryId, location: filteredLocations }).countDocuments();
+        const pageSize = parseInt(req.query.pageSize, 10) || 5;
+        const page = parseInt(req.query.pageNumber, 10) || 1;
 
-        const jobs = await Job.find({ ...keyword, jobType: categoryId, location: filteredLocations }).sort({ createdAt: -1 }).populate('jobType', 'jobTypeName').populate('User', 'firstName').skip(pageSize * (page - 1)).limit(pageSize);
+        const count = await Job.countDocuments({ ...keyword, jobType: categoryId, location: filteredLocations });
+        const jobs = await Job.find({ ...keyword, jobType: categoryId, location: filteredLocations })
+            .sort({ createdAt: -1 })
+            .populate('jobType', 'jobTypeName')
+            .populate('User', 'firstName')
+            .skip(pageSize * (page - 1))
+            .limit(pageSize);
 
         res.status(200).json({
             success: true,
