@@ -3,29 +3,31 @@ const ErrorResponse= require('../utils/errorResponse');
 
 
 //load all users
-exports.allUsers = async (req,res,next)=>{
-    const pageSize = 10;
-    const page = Number(req.query.pageNumber) || 1;
-    const count = await User.find({}).estimatedDocumentCount();
+// controllers/userController.js
+
+exports.allUsers = async (req, res, next) => {
+    const pageSize = 10; // Number of items per page
+    const page = Number(req.query.pageNumber) || 1; // Current page number
+    const count = await User.countDocuments(); // Total number of documents
 
     try {
-        const users = await User.find().sort({ createdAt: -1 }).select('-password')
+        const users = await User.find().sort({ createdAt: -1 })
             .skip(pageSize * (page - 1))
             .limit(pageSize)
+            .select('-password'); // Exclude password field
 
         res.status(200).json({
             success: true,
             users,
             page,
-            pages: Math.ceil(count / pageSize),
+            pages: Math.ceil(count / pageSize), // Total number of pages
             count
-
-        })
-        next();
+        });
     } catch (error) {
         return next(error);
     }
-}
+};
+
 // show single user
 exports.singleUser = async (req,res,next)=>{
     try {
