@@ -6,15 +6,17 @@ const ErrorResponse= require('../utils/errorResponse');
 // controllers/userController.js
 
 exports.allUsers = async (req, res, next) => {
-    const pageSize = 10; // Number of items per page
-    const page = Number(req.query.pageNumber) || 1; // Current page number
-    const count = await User.countDocuments(); // Total number of documents
+    const pageSize = parseInt(req.query.pageSize, 10) || 10; // Default to 10 if pageSize is not provided
+    const page = parseInt(req.query.pageNumber, 10) || 1; // Default to 1 if pageNumber is not provided
 
     try {
-        const users = await User.find().sort({ createdAt: -1 })
+        const count = await User.countDocuments(); // Total number of documents
+
+        const users = await User.find()
+            .sort({ createdAt: -1 })
+            .select('-password') // Exclude password field
             .skip(pageSize * (page - 1))
-            .limit(pageSize)
-            .select('-password'); // Exclude password field
+            .limit(pageSize); // Limit results to the current page
 
         res.status(200).json({
             success: true,
@@ -24,7 +26,7 @@ exports.allUsers = async (req, res, next) => {
             count
         });
     } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
