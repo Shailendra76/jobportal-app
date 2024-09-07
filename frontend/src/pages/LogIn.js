@@ -2,6 +2,7 @@ import { Avatar, Box, TextField, Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import Footer from '../component/Footer';
 import Navbar from '../component/Navbar';
+import { useTheme } from '@emotion/react';
 // import LockClockOutlined from '@mui/icons-material/LockClockOutlined';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSignInAction } from '../redux/actions/userAction';
 import { useNavigate } from 'react-router-dom';
 import loginlogo from '../images/user.png'
+
 const validationSchema = yup.object({
     email: yup
         .string('Enter your email')
@@ -21,6 +23,7 @@ const validationSchema = yup.object({
 });
 
 const LogIn = () => {
+    const { palette } = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector((state) => state.signIn);
@@ -95,12 +98,13 @@ const LogIn = () => {
                         error={formik.touched.email && Boolean(formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                         sx={{
+                          color: palette.secondary.filt ,
                             mb: 3,
-                            input: { color: '#e5e5e5' },
+                            input: { color: palette.secondary.filt1 },
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': { borderColor: 'rgba(255,255,255,0.3)' },
                             },
-                            '& .MuiInputLabel-root': { color: '#e5e5e5' },
+                            '& .MuiInputLabel-root': { color:palette.secondary.filt1 },
                             bgcolor: 'rgba(255,255,255,0.07)',
                         }}
                     />
@@ -118,14 +122,15 @@ const LogIn = () => {
                         error={formik.touched.password && Boolean(formik.errors.password)}
                         helperText={formik.touched.password && formik.errors.password}
                         sx={{
-                            mb: 3,
-                            input: { color: '#e5e5e5' },
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': { borderColor: 'rgba(255,255,255,0.3)' },
-                            },
-                            '& .MuiInputLabel-root': { color: '#e5e5e5' },
-                            bgcolor: 'rgba(255,255,255,0.07)',
-                        }}
+                            color: palette.secondary.filt ,
+                              mb: 3,
+                              input: { color: palette.secondary.filt1 },
+                              '& .MuiOutlinedInput-root': {
+                                  '& fieldset': { borderColor: 'rgba(255,255,255,0.3)' },
+                              },
+                              '& .MuiInputLabel-root': { color:palette.secondary.filt1 },
+                              bgcolor: 'rgba(255,255,255,0.07)',
+                          }}
                     />
                     <Button
                         type="submit"

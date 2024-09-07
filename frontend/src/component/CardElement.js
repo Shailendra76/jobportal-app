@@ -8,12 +8,14 @@ import { IconButton, useTheme } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
-
+import { fontStyle } from '@mui/system';
+import './styles.css';
+import {Box }from '@mui/system';
 const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'white', 
-        border: '1px solid #ccc', 
+        border: '1px solid #a9baa9', 
         borderRadius: '8px', 
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         transition: 'transform 0.3s',
@@ -24,7 +26,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'lightblue', 
-        border: 'none', 
+        border: '1px solid #a9baa9', 
         borderRadius: '16px', 
         boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
         transition: 'background-color 0.3s',
@@ -36,7 +38,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'lightyellow', 
-        border: '2px solid #f0ad4e', 
+        border: '1px solid #a9baa9', 
         borderRadius: '4px', 
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         
@@ -47,7 +49,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'lightgreen', 
-        border: '1px solid #5cb85c', 
+        border:'1px solid #a9baa9', 
         borderRadius: '12px', 
         boxShadow: '0 6px 12px rgba(0, 0, 0, 0.2)',
         '&:hover': {
@@ -59,7 +61,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'lightcoral', 
-        border: '1px solid #d9534f', 
+        border: '1px solid #a9baa9', 
         borderRadius: '20px', 
         boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
        
@@ -70,7 +72,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'lavender', 
-        border: '2px dashed #9370db', 
+        border: '1px solid #a9baa9', 
         borderRadius: '10px', 
         boxShadow: '0 5px 10px rgba(147, 112, 219, 0.2)',
         '&:hover': {
@@ -82,7 +84,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'peachpuff', 
-        border: '2px dotted #ff6347', 
+        border: '1px solid #a9baa9', 
         borderRadius: '25px', 
         boxShadow: '0 4px 8px rgba(255, 99, 71, 0.2)',
         '&:hover': {
@@ -93,7 +95,7 @@ const stylesArray = [
     { 
         minWidth: 275, mb: 3, mt: 3, 
         bgcolor: 'mintcream', 
-        border: '1px solid #3cb371', 
+        border: '1px solid #a9baa9', 
         borderRadius: '8px', 
         boxShadow: '0 4px 8px rgba(60, 179, 113, 0.2)',
         '&:hover': {
@@ -123,10 +125,10 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
                 <Typography sx={{ fontSize: 15, color: palette.secondary.main, fontWeight: 500 }} gutterBottom>
                     <IconButton><LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} /></IconButton> {location}
                 </Typography>
-                <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: palette.primary.main }}>
+                <Typography  variant="h5" component="div" sx={{ fontWeight: 'bold', color: 'black', textTransform: 'uppercase' }}>
                     {jobTitle}
                 </Typography>
-                <Typography sx={{ mb: 1.5, fontSize: 16, color: palette.info.main, fontWeight: 600 }}>
+                <Typography sx={{ mb: 1.5, fontSize: 16, color: 'black', fontWeight: 600, textTransform: 'capitalize'  }}>
                     {category}
                 </Typography>
                 <Typography variant="body2" sx={{ fontSize: 14, color: palette.text.primary, lineHeight: 1.6 }}>
@@ -134,9 +136,11 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button disableElevation variant='contained' size="small" startIcon={<AddIcon />}>
-                    <Link style={{ textDecoration: "none", color: "white", boxShadow: 0 }} to={`/job/${id}`}>More Details</Link>
-                </Button>
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+        <Button disableElevation variant='contained' size="small" startIcon={<AddIcon />}>
+            <Link style={{ textDecoration: "none", color: "white", boxShadow: 0 }} to={`/job/${id}`}>More Details</Link>
+        </Button>
+             </Box>
             </CardActions>
         </Card>
     );

@@ -75,7 +75,7 @@ const Navbar = () => {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
-                            color: 'inherit',
+                            color: 'black',
                             textDecoration: 'none',
                         }}
                     >
@@ -112,7 +112,7 @@ const Navbar = () => {
                             }}
                         >
                             {['Home', 'Log In', 'Register'].map((page) => (
-                                <MenuItem key={page} onClick={() => handlePageClick(page)}>
+                                <MenuItem  sx = {{ color:palette.secondary.filt1 }} key={page} onClick={() => handlePageClick(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -124,12 +124,12 @@ const Navbar = () => {
                             <>
                                 <Button sx={{ my: 2, color: 'white', display: 'flex', alignItems: 'center' }} onClick={() => handlePageClick('Home')}>
                                     <img src={homeIcon} alt="Home Icon" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
-                                    <Typography class="quicksand-custom">Home</Typography>
+                                    <Typography sx = {{ color:palette.secondary.filt1 }} class="quicksand-custom">Home</Typography>
                                 </Button>
 
                                 <Button sx={{ my: 2, color: 'white', display: 'flex', alignItems: 'center' }} onClick={() => handlePageClick('Register')}>
                                     <img src={registerIcon} alt="Register Icon" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
-                                    <Typography class="quicksand-custom">Register</Typography>
+                                    <Typography sx = {{ color:palette.secondary.filt1 }} class="quicksand-custom">Register</Typography>
                                 </Button>
                             </>
                         )}
@@ -174,20 +174,20 @@ const Navbar = () => {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} to="/user/dashboard">User Dashboard</Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/forgotpassword">Forgot Password</Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} to="/forgotpassword">Forgot Password</Link></Typography>
                             </MenuItem>
                             {!userInfo ?
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/login">Log In</Link></Typography>
+                                    <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} to="/login">Log In</Link></Typography>
                                 </MenuItem> :
                                 <MenuItem onClick={logOutUser}>
-                                    <Typography style={{ textDecoration: "none", color: palette.secondary.main }} textAlign="center">Log Out</Typography>
+                                    <Typography style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} textAlign="center">Log Out</Typography>
                                 </MenuItem>
                             }
                         </Menu>

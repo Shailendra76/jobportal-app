@@ -27,6 +27,7 @@ import {
     USER_SIGNUP_SUCCESS
 } from '../constants/userConstant';
 
+axios.defaults.withCredentials = true;
 
 
 export const userSignInAction = (user) => async (dispatch) => {
@@ -136,10 +137,10 @@ export const userProfileAction = () => async (dispatch) => {
 
 
 //all user action
-export const allUserAction = () => async (dispatch) => {
+export const allUserAction = (pageNumber=1, pageSize=10) => async (dispatch) => {
     dispatch({ type: ALL_USER_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/allusers`);
+        const { data } = await axios.get(`/allusers?pageNumber=${pageNumber}&pageSize=${pageSize}`);
         dispatch({
             type: ALL_USER_LOAD_SUCCESS,
             payload: data

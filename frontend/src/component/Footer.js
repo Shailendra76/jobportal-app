@@ -62,7 +62,7 @@ const Footer = () => {
     component='span'
     sx={{
         color: 'black',
-        backgroundColor: '#1374c0',
+        backgroundColor: '#addafd',
         mt: 2,
         mb: -18,
         width: '100%',
@@ -72,7 +72,7 @@ const Footer = () => {
         alignItems: 'center',
     }}
 >
-    @All rights reserved! 2023.
+    @All rights reserved! 2024.
 </Box>
 
 </Box>

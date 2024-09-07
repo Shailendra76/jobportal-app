@@ -31,7 +31,9 @@ export const themeColors = (mode) => ({
                 },
                 secondary: {
                     main: lightBlue[800],
-                    midNightBlue: "#003366"
+                    midNightBlue: "#003366",
+                    filt:"white",
+                     filt1:"black"
 
                 },
                
@@ -48,7 +50,9 @@ export const themeColors = (mode) => ({
                 },
                 secondary: {
                     main: blue[500],
-                    midNightBlue: "#2196f3"
+                    midNightBlue: "#2196f3",
+                    filt:"black",
+                    filt1:"white"
                 },
                 background: {
                     default: "#0f171e"

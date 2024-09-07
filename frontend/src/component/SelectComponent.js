@@ -27,7 +27,7 @@ const SelectComponent = ({ handleChangeCategory, cat }) => {
                         MenuProps: {
                             MenuListProps: {
                                 sx: {
-                                    backgroundColor: palette.secondary.main
+                                    backgroundColor: palette.secondary.filt
                                 }
                             }
                         }
@@ -38,9 +38,19 @@ const SelectComponent = ({ handleChangeCategory, cat }) => {
                     label="Category"
                     onChange={handleChangeCategory}
                 >
-                    <MenuItem value="">All</MenuItem>
+                   <MenuItem 
+                        value="" 
+                        sx={{ 
+                           // Change background color
+                            color: palette.secondary.filt1 // Change text color
+                        }}
+                    >
+                        All</MenuItem>
                     {jobType && jobType.map(jt => (
-                        <MenuItem key={jt._id} value={jt._id}>{jt.jobTypeName}</MenuItem>
+                        <MenuItem   sx={{ 
+                            // Change background color
+                             color: palette.secondary.filt1 // Change text color
+                         }} key={jt._id} value={jt._id}>{jt.jobTypeName}</MenuItem>
                     ))}
                 </Select>
             </FormControl>

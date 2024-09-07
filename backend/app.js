@@ -4,7 +4,7 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-var cors = require("cors");
+
 const cookieParser = require("cookie-parser");
 const errorHandler= require("./middleware/error");
 const authRoutes = require('./routes/authRoutes')
@@ -24,6 +24,12 @@ const jobRoute = require('./routes/jobsRoutes')
 
 // app.use(cors(corsOptions));
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'https://your-frontend.vercel.app', // Replace with your frontend URL
+  credentials: true // Allow cookies to be sent and received
+}));
 
 
 // database connection
@@ -49,7 +55,7 @@ app.use(bodyParser.urlencoded({
     extended:true
 }));
 app.use(cookieParser());
-app.use(cors());
+
 
 // app.get('/',(req,res)=>{
 //     res.send("helo");
