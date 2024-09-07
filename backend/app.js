@@ -27,7 +27,7 @@ const jobRoute = require('./routes/jobsRoutes')
 const cors = require('cors');
 
 app.use(cors({
-  origin: 'https://newdemo-ruby.vercel.app/', // Replace with your frontend URL
+  origin: 'https://newdemo-noh178rdv-shailendras-projects-cc694aed.vercel.app', // Replace with your frontend URL
   credentials: true // Allow cookies to be sent and received
 }));
 
@@ -39,7 +39,7 @@ mongoose.connect(process.env.MONGO_URI,{
     useCreateIndex:true
 })
 .then(() => {
-    app.listen(process.env.PORT,'0.0.0.0',()=>{
+    app.listen(process.env.PORT,()=>{
 console.log("connection sucessful")
     })
 })
