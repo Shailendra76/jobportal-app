@@ -65,7 +65,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // Set to true in production
       sameSite: 'None', // Required for cross-site cookies
-      domain: 'https://newdemo-ruby.vercel.app',
+      domain: 'newdemo-ruby.vercel.app',
       path: '/'
     })
     .json({
@@ -80,7 +80,7 @@ exports.logout = (req, res, next) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
-  domain: 'https://newdemo-ruby.vercel.app'
+  domain: 'newdemo-ruby.vercel.app'
   });
   res.status(200).json({
     success: true,
