@@ -5,7 +5,7 @@ const { isAuthenticated ,protect,isAdmin} = require('../middleware/auth');
 const {forgotPassword, resetPassword}= require('../controllers/forgotPasswordController');
 //  auth routes
 router.get('/profile',isAuthenticated);
-router.get('/allusers', isAdmin,allUsers);
+router.get('/allusers', isAuthenticated,isAdmin,allUsers);
 
 router.get('/user/:id', isAuthenticated,singleUser);
 router.put('/user/edit/:id', isAuthenticated,editUser);
