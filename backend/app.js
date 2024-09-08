@@ -27,7 +27,7 @@ const jobRoute = require('./routes/jobsRoutes')
 const cors = require('cors');
 
 app.use(cors({
-  origin: ' https://newdemo-fijj43trv-shailendras-projects-cc694aed.vercel.app', // Replace with your frontend URL
+  origin: ' https://newdemo-pj3xisk2l-shailendras-projects-cc694aed.vercel.app', // Replace with your frontend URL
   credentials: true // Allow cookies to be sent and received
 }));
 
