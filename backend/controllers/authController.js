@@ -60,11 +60,11 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
 
   res.status(codeStatus)
-    .cookie('token', token, {
+    res.cookie('token', token, {
       maxAge: 60 * 60 * 1000, // 1 hour
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // Set to true in production
-      sameSite: 'strict', // Required for cross-site cookies
+      sameSite: 'None', // Required for cross-site cookies
       domain: 'https://newdemo-ruby.vercel.app'
     })
     .json({
