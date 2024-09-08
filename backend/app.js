@@ -28,7 +28,8 @@ const cors = require('cors');
 
 app.use(cors({
   origin: ' https://newdemo-ruby.vercel.app', // Replace with your frontend URL
-  credentials: true // Allow cookies to be sent and received
+  credentials: true ,// Allow cookies to be sent and received
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
 
