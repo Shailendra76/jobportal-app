@@ -64,7 +64,8 @@ const sendTokenResponse = async (user, codeStatus, res) => {
       maxAge: 60 * 60 * 1000, // 1 hour
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // Set to true in production
-      sameSite: 'None' // Required for cross-site cookies
+      sameSite: 'None', // Required for cross-site cookies
+      domain: 'https://newdemo-ruby.vercel.app'
     })
     .json({
       success: true,
@@ -77,7 +78,8 @@ exports.logout = (req, res, next) => {
   res.clearCookie('token', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'None'
+    sameSite: 'None',
+  domain: 'https://newdemo-ruby.vercel.app'
   });
   res.status(200).json({
     success: true,
