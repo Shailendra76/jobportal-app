@@ -50,19 +50,46 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         trim: true,
-        required: [true, 'first name is required'],
+        validate: {
+            // First name is required only if GoogleId is not present
+            validator: function (value) {
+                if (!this.googleId && !value) {
+                    return false;  // First name is required if no Google ID
+                }
+                return true;
+            },
+            message: 'First name is required unless signing in with Google'
+        },
         maxlength: 20
     },
     lastName: {
         type: String,
         trim: true,
-        required: [true, 'last name is required'],
+        validate: {
+            // Last name is required only if GoogleId is not present
+            validator: function (value) {
+                if (!this.googleId && !value) {
+                    return false;  // Last name is required if no Google ID
+                }
+                return true;
+            },
+            message: 'Last name is required unless signing in with Google'
+        },
         maxlength: 20
     },
     email: {
         type: String,
         trim: true,
-        required: [true, 'e-mail is required'],
+        validate: {
+            // Last name is required only if GoogleId is not present
+            validator: function (value) {
+                if (!this.googleId && !value) {
+                    return false;  // Last name is required if no Google ID
+                }
+                return true;
+            },
+            message: 'mail_id is required unless signing in with Google'
+        },
         unique: true,
         match: [
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,

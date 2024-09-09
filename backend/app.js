@@ -28,6 +28,8 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
 }, async (req, accessToken, refreshToken, profile, done) => {
     try {
+        const firstName = profile.name.givenName;
+        const lastName = profile.name.familyName;
         const user = await User.findOne({ googleId: profile.id });
         if (user) {
             // Update user with tokens
