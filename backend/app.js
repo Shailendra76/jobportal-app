@@ -21,6 +21,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //     allowedHeaders: '*', // Allows all headers
 //     credentials: true 
 // };
+app.use(passport.initialize());
+app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
