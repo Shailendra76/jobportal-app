@@ -62,11 +62,9 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   //res.status(codeStatus)
     res.cookie('token', token, {
       maxAge: 60 * 60 * 1000, // 1 hour
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to true in production
-      sameSite: 'None', // Required for cross-site cookies
-      domain: '.vercel.app',
-      path: '/'
+      httpOnly: true
+
+      
     })
     .status(codeStatus)
     .json({
@@ -78,10 +76,8 @@ const sendTokenResponse = async (user, codeStatus, res) => {
 // Logout
 exports.logout = (req, res, next) => {
   res.clearCookie('token', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'None',
-  domain: '.vercel.app'
+    httpOnly: true
+    
   });
   res.status(200).json({
     success: true,
