@@ -68,6 +68,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
       domain: '.vercel.app',
       path: '/'
     })
+    .status(codeStatus)
     .json({
       success: true,
       role: user.role
@@ -80,7 +81,7 @@ exports.logout = (req, res, next) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
-  domain: 'newdemo-ruby.vercel.app'
+  domain: '.vercel.app'
   });
   res.status(200).json({
     success: true,
