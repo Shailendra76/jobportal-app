@@ -2,7 +2,7 @@
  const router = express.Router();
  const {signup,signin,logout,userProfile}= require('../controllers/authController');
  const { isAuthenticated } = require('../middleware/auth');
- const { googleLogin, googleCallback, logout } = require('../controllers/authController');
+ const { googleLogin, googleCallback } = require('../controllers/authController');
 
 //  auth routes
 router.post('/signup',signup);
