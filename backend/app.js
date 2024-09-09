@@ -11,14 +11,45 @@ const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
-
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const corsOptions = {
 //     origin: 'https://newdemo-ruby.vercel.app', 
 //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //     allowedHeaders: '*', // Allows all headers
 //     credentials: true 
 // };
-
+passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: '/auth/google/callback',
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          const user = await User.findOne({ googleId: profile.id });
+          if (!user) {
+            const newUser = new User({
+              googleId: profile.id,
+              email: profile.emails[0].value,
+              name: profile.displayName,
+            });
+            await newUser.save();
+            return done(null, newUser);
+          }
+          return done(null, user);
+        } catch (error) {
+          return done(error, false);
+        }
+      }
+    )
+  );
+  
+  passport.serializeUser((user, done) => done(null, user.id));
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => done(err, user));
+  });
 
 
 
