@@ -4,6 +4,8 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const User = require('./models/User'); // Adjust the path based on your directory structure
+
 
 const cookieParser = require("cookie-parser");
 const errorHandler= require("./middleware/error");
