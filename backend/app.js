@@ -19,38 +19,35 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //     allowedHeaders: '*', // Allows all headers
 //     credentials: true 
 // };
-passport.use(
-    new GoogleStrategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/auth/google/callback',
-      },
-      async (accessToken, refreshToken, profile, done) => {
-        try {
-          const user = await User.findOne({ googleId: profile.id });
-          if (!user) {
-            const newUser = new User({
-              googleId: profile.id,
-              email: profile.emails[0].value,
-              name: profile.displayName,
-            });
-            await newUser.save();
-            return done(null, newUser);
-          }
-          return done(null, user);
-        } catch (error) {
-          return done(error, false);
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
+    passReqToCallback: true
+}, async (req, accessToken, refreshToken, profile, done) => {
+    try {
+        const user = await User.findOne({ googleId: profile.id });
+        if (user) {
+            // Update user with tokens
+            user.accessToken = accessToken;
+            user.refreshToken = refreshToken;
+            await user.save();
+            return done(null, user);
         }
-      }
-    )
-  );
-  
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
-  });
 
+        // Create a new user if not found
+        const newUser = await User.create({
+            googleId: profile.id,
+            accessToken,
+            refreshToken,
+            name: profile.displayName,
+            email: profile.emails[0].value
+        });
+        done(null, newUser);
+    } catch (error) {
+        done(error, null);
+    }
+}));
 
 
 // app.use(cors(corsOptions));

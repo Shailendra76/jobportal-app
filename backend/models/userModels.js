@@ -41,6 +41,9 @@ const jobsHistorySchema = new mongoose.Schema({
 }, { timestamps: true })
 
 const userSchema = new mongoose.Schema({
+    googleId: {type:String},
+    accessToken:{type:String} ,
+    refreshToken: {type:String},
     firstName:{
         type:String,
         trim: true,
