@@ -75,7 +75,7 @@ exports.googleCallback = passport.authenticate('google', {
       });
       await user.save();
     }
-
+    res.redirect('/profile');
     // Send token response
     sendTokenResponse(user, 200, res);
   } catch (error) {

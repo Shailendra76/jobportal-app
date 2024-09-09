@@ -10,11 +10,5 @@ router.post('/signin',signin);
 router.get('/logout',logout);
 router.get('/me', isAuthenticated,userProfile);
 router.get('/auth/google', googleLogin);
-router.get('/custom/callback',
-    passport.authenticate('google', { session: false }),
-    (req, res) => {
-        // Successful authentication, redirect home or to your frontend app.
-        res.redirect('/profile'); // Adjust to your frontend URL
-    }
-);
+router.get('/auth/google/callback', googleCallback);
 module.exports = router;
