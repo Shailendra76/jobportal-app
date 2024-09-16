@@ -75,7 +75,7 @@ exports.createUserJobsHistory = async (req, res, next) => {
 
     try {
         const currentUser = await User.findOne({ _id: req.user._id });
-        const jobId=await User.findOne({ _id: req.job._id });
+        
         if (!currentUser) {
             return next(new ErrorResponse("You must log in", 401));
         } else {
@@ -86,7 +86,7 @@ exports.createUserJobsHistory = async (req, res, next) => {
                 location,
                 status, // Add the status field
                 user: req.user._id,
-                jobId
+                jobId:req.job._id
             }
             currentUser.jobsHistory.push(addJobHistory);
             await currentUser.save();
