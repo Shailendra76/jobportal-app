@@ -9,6 +9,5 @@ router.post('/signup',signup);
 router.post('/signin',signin);
 router.get('/logout',logout);
 router.get('/me', isAuthenticated,userProfile);
-router.get('/auth/google', googleLogin);
-router.get('/auth/google/callback', googleCallback);
+
 module.exports = router;

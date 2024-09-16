@@ -34,11 +34,7 @@ const jobsHistorySchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    job: {
-        type: ObjectId,
-        ref: "Job",
-        required: true  // Ensure that the job ID is required
-    },
+   
 }, { timestamps: true });
 
 // User Schema

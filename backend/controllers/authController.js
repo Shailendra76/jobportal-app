@@ -50,38 +50,6 @@ exports.signin = async (req, res, next) => {
   }
 };
 
-// Google OAuth Login
-exports.googleLogin = passport.authenticate('google', {
-  scope: ['profile', 'email']
-});
-
-// Google OAuth Callback
-exports.googleCallback = passport.authenticate('google', {
-  failureRedirect: '/login', // Redirect to login on failure
-  session: false, // If you want to manage sessions with JWT
-}), async (req, res, next) => {
-  try {
-    const { id, displayName, emails } = req.user; // Google's user profile
-
-    // Check if user already exists
-    let user = await User.findOne({ email: emails[0].value });
-    if (!user) {
-      // Create new user if not found
-      user = new User({
-        googleId: id,
-        name: displayName,
-        email: emails[0].value,
-        password: null, // Password is not applicable for OAuth users
-      });
-      await user.save();
-    }
-    res.redirect('/profile');
-    // Send token response
-    sendTokenResponse(user, 200, res);
-  } catch (error) {
-    next(error);
-  }
-};
 
 // Send token response (shared between normal and Google OAuth login)
 const sendTokenResponse = async (user, codeStatus, res) => {
