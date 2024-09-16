@@ -70,11 +70,12 @@ exports.deleteUser = async (req,res,next)=>{
     } 
 }
 exports.createUserJobsHistory = async (req, res, next) => {
-    const { title, description, salary, location, status = 'pending',jobId } = req.body;
-     console.log(jobId)
+    const { title, description, salary, location, status = 'pending' } = req.body;
+  
 
     try {
         const currentUser = await User.findOne({ _id: req.user._id });
+        const jobId=await User.findOne({ _id: req.job._id });
         if (!currentUser) {
             return next(new ErrorResponse("You must log in", 401));
         } else {
