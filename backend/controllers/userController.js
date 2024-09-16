@@ -70,7 +70,8 @@ exports.deleteUser = async (req,res,next)=>{
     } 
 }
 exports.createUserJobsHistory = async (req, res, next) => {
-    const { title, description, salary, location, status = 'pending' } = req.body;
+    const { title, description, salary, location, status = 'pending',jobId } = req.body;
+     console.log(jobId)
 
     try {
         const currentUser = await User.findOne({ _id: req.user._id });
@@ -83,10 +84,16 @@ exports.createUserJobsHistory = async (req, res, next) => {
                 salary,
                 location,
                 status, // Add the status field
-                user: req.user._id
+                user: req.user._id,
+                jobId
             }
             currentUser.jobsHistory.push(addJobHistory);
             await currentUser.save();
+            await JobApplication.create({
+                user: req.user._id,
+                job: addJobHistory._id, // Assuming you have job ID from the job model
+                status: 'pending'
+            });
         }
 
         res.status(200).json({
