@@ -1,6 +1,6 @@
 const User = require('../models/userModels');
 const ErrorResponse = require('../utils/errorResponse');
-const passport = require('passport');
+
 
 // Signup (No changes required for Google authentication)
 exports.signup = async (req, res, next) => {

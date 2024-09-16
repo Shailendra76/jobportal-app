@@ -13,52 +13,17 @@ const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const jobTypeRoute = require('./routes/jobsTypeRoutes')
 const jobRoute = require('./routes/jobsRoutes')
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 // const corsOptions = {
 //     origin: 'https://newdemo-ruby.vercel.app', 
 //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //     allowedHeaders: '*', // Allows all headers
 //     credentials: true 
 // };
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `/auth/google/callback`,
-    passReqToCallback: true
-}, async (req, accessToken, refreshToken, profile, done) => {
-    try {
-        const firstName = profile.name.givenName;
-        const lastName = profile.name.familyName;
-        const user = await User.findOne({ googleId: profile.id });
-        if (user) {
-            // Update user with tokens
-            user.accessToken = accessToken;
-            user.refreshToken = refreshToken;
-            await user.save();
-            return done(null, user);
-        }
-
-        // Create a new user if not found
-        const newUser = await User.create({
-            googleId: profile.id,
-            accessToken,
-            refreshToken,
-            name: profile.displayName,
-            email: profile.emails[0].value
-        });
-        done(null, newUser);
-    } catch (error) {
-        done(error, null);
-    }
-}));
-
 
 // app.use(cors(corsOptions));
 
-const cors = require('cors');
+// const cors = require('cors');
 
 // app.use(cors({
 //   origin: ' https://newdemo-ruby.vercel.app', // Replace with your frontend URL
