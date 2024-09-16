@@ -88,13 +88,13 @@ exports.createUserJobsHistory = async (req, res, next) => {
                 user: req.user._id,
                 jobId:req.job._id
             }
-            currentUser.jobsHistory.push(addJobHistory);
-            await currentUser.save();
-            await JobApplication.create({
-                user: req.user._id,
-                job: addJobHistory._id, // Assuming you have job ID from the job model
-                status: 'pending'
-            });
+            // currentUser.jobsHistory.push(addJobHistory);
+            // await currentUser.save();
+            // await JobApplication.create({
+            //     user: req.user._id,
+            //     job: addJobHistory._id, // Assuming you have job ID from the job model
+            //     status: 'pending'
+            // });
         }
 
         res.status(200).json({
