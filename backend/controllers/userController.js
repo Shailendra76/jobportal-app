@@ -70,8 +70,10 @@ exports.deleteUser = async (req,res,next)=>{
     } 
 }
 exports.createUserJobsHistory = async (req, res, next) => {
-    const { title, description, salary, location, status = 'pending' } = req.body;
-  
+    const { title, description, salary, location, status = 'pending',jobId } = req.body;
+    if (!jobId) {
+        return res.status(400).json({ error: 'Job ID is required' });
+    }
 
     try {
         const currentUser = await User.findOne({ _id: req.user._id });
@@ -86,7 +88,7 @@ exports.createUserJobsHistory = async (req, res, next) => {
                 location,
                 status, // Add the status field
                 user: req.user._id,
-                jobId:req.job._id
+                jobId
             }
             // currentUser.jobsHistory.push(addJobHistory);
             // await currentUser.save();
