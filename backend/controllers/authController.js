@@ -54,13 +54,14 @@ exports.signin = async (req, res, next) => {
 // Send token response (shared between normal and Google OAuth login)
 const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
-  res.cookie('token', token, {
+  res.status(codeStatus)
+  .cookie('token', token, {
       maxAge: 60 * 60 * 1000, // 1 hour
       httpOnly: true,
       secure: true, // Set 'secure' to true if in production (HTTPS)
       sameSite: 'None',
     })
-    .status(codeStatus)
+   
     .json({
       success: true,
       role: user.role,
