@@ -56,18 +56,22 @@ const sendTokenResponse = async (user, codeStatus, res) => {
   const token = await user.getJwtToken();
   res.cookie('token', token, {
       maxAge: 60 * 60 * 1000, // 1 hour
-      httpOnly: true
+      httpOnly: true,
+      secure: true, // Set 'secure' to true if in production (HTTPS)
+      sameSite: 'None',
     })
     .status(codeStatus)
     .json({
       success: true,
-      role: user.role
+      role: user.role,
+      token
     });
 };
 
 // Logout (No changes required)
 exports.logout = (req, res, next) => {
-  res.clearCookie('token', { httpOnly: true });
+  res.clearCookie('token', { httpOnly: true ,secure: true, // Set 'secure' to true if in production (HTTPS)
+    sameSite: 'None',});
   res.status(200).json({
     success: true,
     message: "Logged out"
