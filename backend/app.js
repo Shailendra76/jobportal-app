@@ -20,6 +20,15 @@ const jobRoute = require('./routes/jobsRoutes')
 //     allowedHeaders: '*', // Allows all headers
 //     credentials: true 
 // };
+const cors = require('cors');
+
+const corsOptions = {
+  origin: "https://newdemo-ruby.vercel.app", // Replace with your Vercel frontend URL
+  credentials: true, // Allow cookies and credentials to be sent
+};
+
+app.use(cors(corsOptions));
+
 
 
 
