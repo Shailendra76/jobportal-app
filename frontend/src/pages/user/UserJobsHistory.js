@@ -23,6 +23,7 @@ const UserJobsHistory = () => {
                                 description={history.description}
                                 category=''
                                 location={history.location}
+                                status={history.applicationStatus}
                             />
                         ))
                     }

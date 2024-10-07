@@ -29,14 +29,14 @@ import {
   
 } from "../constants/jobconstant"
 
-const base_url="https://jobportal-app-1.onrender.com/"
+const base_url="https://jobportal-app-1.onrender.com"
 
 
 
-export const jobLoadAction = (pageNumber = 1, pageSize = 5, keyword = '', cat = '', location = '') => async (dispatch) => {
+export const jobLoadAction = (pageNumber, keyword = '', cat = '', location = '') => async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/jobs/show?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&cat=${cat}&location=${location}`);
+        const { data } = await axios.get(`${base_url}/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`)
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
@@ -52,7 +52,7 @@ export const jobLoadAction = (pageNumber = 1, pageSize = 5, keyword = '', cat = 
 export const jobLoadSingleAction = (id) => async (dispatch) => {
     dispatch({ type: JOB_LOAD_SINGLE_REQUEST });
     try {
-        const { data } = await axios.get(`/job/${id}`);
+        const { data } = await axios.get(`${base_url}/job/${id}`);
         dispatch({
             type: JOB_LOAD_SINGLE_SUCCESS,
             payload: data
@@ -60,15 +60,16 @@ export const jobLoadSingleAction = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: JOB_LOAD_SINGLE_FAIL,
-            payload: error.response.data.error
+            payload: error.response?.data?.error || error.message // Handle error response safely
         });
     }
-}
+};
+
 //delete single job action
 export const deleteSingleJobAction = (job_id) => async (dispatch) => {
     dispatch({ type: DELETE_JOB_REQUEST });
     try {
-        const { data } = await axios.delete(`/job/delete/${job_id}`);
+        const { data } = await axios.delete(`${base_url}/job/delete/${job_id}`);
         dispatch({
             type: DELETE_JOB_SUCCESS,
             payload: data
@@ -95,7 +96,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
 
     try {
-        const { data } = await axios.post(`/job/create`, job)
+        const { data } = await axios.post(`${base_url}/job/create`, job)
         dispatch({
             type: REGISTER_JOB_SUCCESS,
             payload: data
@@ -124,7 +125,7 @@ export const registerAjobAction = (job) => async (dispatch) => {
 export const editSingleJobAction = (job) => async (dispatch) => {
     dispatch({ type: EDIT_JOB_REQUEST });
     try {
-        const { data } = await axios.put(`/job/update/${job._id}`, job);
+        const { data } = await axios.put(`${base_url}/job/update/${job._id}`, job);
         dispatch({
             type: EDIT_JOB_SUCCESS,
             payload: data

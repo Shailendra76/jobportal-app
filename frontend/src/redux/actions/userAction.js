@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
+
 import {
     ALL_USER_LOAD_FAIL,
     ALL_USER_LOAD_REQUEST,
@@ -30,10 +31,17 @@ import {
 axios.defaults.withCredentials = true;
 
 
+ const base_url="https://jobportal-app-1.onrender.com"
+
 export const userSignInAction = (user) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST });
     try {
-        const { data } = await axios.post(`/signin`, user);
+        const { data } = await axios.post(`${base_url}/signin`, user , {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          });
+        
+       
         localStorage.setItem('userInfo', JSON.stringify(data));
         dispatch({
             type: USER_SIGNIN_SUCCESS,
@@ -62,7 +70,7 @@ export const userSignInAction = (user) => async (dispatch) => {
 export const userSignUpAction = (user) => async (dispatch) => {
     dispatch({ type: USER_SIGNUP_REQUEST });
     try {
-        const { data } = await axios.post(`/signup`, user);
+        const { data } = await axios.post(`${base_url}/signup`, user);
 
         dispatch({
             type: USER_SIGNUP_SUCCESS,
@@ -92,7 +100,7 @@ export const userLogoutAction = () => async (dispatch) => {
     dispatch({ type: USER_LOGOUT_REQUEST });
     try {
         localStorage.removeItem('userInfo');
-        const { data } = await axios.get(`/logout`);
+        const { data } = await axios.get(`${base_url}/logout`);
         dispatch({
             type: USER_LOGOUT_SUCCESS,
             payload: data
@@ -121,7 +129,7 @@ export const userLogoutAction = () => async (dispatch) => {
 export const userProfileAction = () => async (dispatch) => {
     dispatch({ type: USER_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/me`);
+        const { data } = await axios.get(`${base_url}/me`);
         dispatch({
             type: USER_LOAD_SUCCESS,
             payload: data
@@ -137,10 +145,10 @@ export const userProfileAction = () => async (dispatch) => {
 
 
 //all user action
-export const allUserAction = (pageNumber=1, pageSize=10) => async (dispatch) => {
+export const allUserAction = () => async (dispatch) => {
     dispatch({ type: ALL_USER_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/allusers?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        const { data } = await axios.get(`${base_url}/allusers`);
         dispatch({
             type: ALL_USER_LOAD_SUCCESS,
             payload: data
@@ -158,7 +166,7 @@ export const allUserAction = (pageNumber=1, pageSize=10) => async (dispatch) => 
 export const userApplyJobAction = (job) => async (dispatch) => {
     dispatch({ type: USER_APPLY_JOB_REQUEST });
     try {
-        const { data } = await axios.post(`/user/jobhistory`, job);
+        const { data } = await axios.post(`${base_url}/user/jobhistory`, job);
 
         dispatch({
             type: USER_APPLY_JOB_SUCCESS,
@@ -176,7 +184,7 @@ export const userApplyJobAction = (job) => async (dispatch) => {
 export const userForgotPasswordAction = (user) => async (dispatch) => {
     dispatch({ type: USER_PASS_RES_REQUEST });
     try {
-        const { data } = await axios.post(`/forgotpassword`, user);
+        const { data } = await axios.post(`${base_url}/forgotpassword`, user);
 
         dispatch({
             type: USER_PASS_RES_SUCCESS,
@@ -203,7 +211,7 @@ export const userForgotPasswordAction = (user) => async (dispatch) => {
 export const userResetPasswordAction = (user) => async (dispatch) => {
     dispatch({ type: USER_PASS_RESE_REQUEST });
     try {
-        const { data } = await axios.post(`/resetpassword`, user);
+        const { data } = await axios.post(`${base_url}/resetpassword`, user);
 
         dispatch({
             type: USER_PASS_RESE_SUCCESS,

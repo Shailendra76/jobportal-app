@@ -12,12 +12,12 @@ CREATE_JOB_TYPE_SUCCESS} from '../constants/jobTypeConstant';
 
 
 
-
+ const base_url="https://jobportal-app-1.onrender.com"
 
 export const jobTypeLoadAction = () => async (dispatch) => {
     dispatch({ type: JOB_TYPE_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/type/jobs`);
+        const { data } = await axios.get(`${base_url}/type/jobs`);
         dispatch({
             type: JOB_TYPE_LOAD_SUCCESS,
             payload: data
@@ -34,7 +34,7 @@ export const createJobTypeAction = (jobtype) => async (dispatch) => {
     dispatch({ type: CREATE_JOB_TYPE_REQUEST })
 
     try {
-        const { data } = await axios.post(`/type/create`, jobtype)
+        const { data } = await axios.post(`${base_url}/type/create`, jobtype)
         dispatch({
             type: CREATE_JOB_TYPE_SUCCESS,
             payload: data

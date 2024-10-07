@@ -66,29 +66,36 @@ const Home = () => {
 
                         {/* Filter by location */}
                         <Card sx={{ flex: 1, p: 2, bgcolor: palette.secondary.filt, maxHeight: 300, overflow: 'auto' }}>
-                            <Box sx={{ pb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Typography component="h4" sx={{ color: palette.secondary.filt1, fontWeight: 600 }}>
-                                    Filter job by location
-                                </Typography>
-                                <IconButton onClick={handleExpandLocation}>
-                                    {expandLocation ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                                </IconButton>
-                            </Box>
-                            {expandLocation && (
-                                <MenuList>
-                                    {
-                                        setUniqueLocation && setUniqueLocation.map((loc, i) => (
-                                            <MenuItem key={i}>
-                                                <ListItemIcon>
-                                                    <LocationOnIcon sx={{ color: palette.secondary.filt1, fontSize: 18 }} />
-                                                </ListItemIcon>
-                                                <Link style={{ color: palette.secondary.filt1 }} to={`/search/location/${loc}`}>{loc}</Link>
-                                            </MenuItem>
-                                        ))
-                                    }
-                                </MenuList>
-                            )}
-                        </Card>
+    <Box sx={{ pb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography component="h4" sx={{ color: palette.secondary.filt1, fontWeight: 600 }}>
+            Filter job by location
+        </Typography>
+        <IconButton onClick={handleExpandLocation}>
+            {expandLocation ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </IconButton>
+    </Box>
+    {expandLocation && (
+        <MenuList>
+            {/* Add "All locations" filter option */}
+            <MenuItem key="all-locations">
+                <ListItemIcon>
+                    <LocationOnIcon sx={{ color: palette.secondary.filt1, fontSize: 18 }} />
+                </ListItemIcon>
+                <Link style={{ color: palette.secondary.filt1 }} to="/search/location/All">All locations</Link>
+            </MenuItem>
+
+            {/* Dynamically render all other locations */}
+            {setUniqueLocation && setUniqueLocation.map((loc, i) => (
+                <MenuItem key={i}>
+                    <ListItemIcon>
+                        <LocationOnIcon sx={{ color: palette.secondary.filt1, fontSize: 18 }} />
+                    </ListItemIcon>
+                    <Link style={{ color: palette.secondary.filt1 }} to={`/search/location/${loc}`}>{loc}</Link>
+                </MenuItem>
+            ))}
+        </MenuList>
+    )}
+</Card>
                     </Stack>
 
                     {loading ? (

@@ -110,7 +110,7 @@ const capitalizeWords = (text) => {
     return text.replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
-const CardElement = ({ jobTitle, description, category, location, id }) => {
+const CardElement = ({ jobTitle, description, category, location, id, status }) => {
     const { palette } = useTheme();
     const [style, setStyle] = React.useState({});
 
@@ -130,6 +130,9 @@ const CardElement = ({ jobTitle, description, category, location, id }) => {
                 </Typography>
                 <Typography sx={{ mb: 1.5, fontSize: 16, color: 'black', fontWeight: 600, textTransform: 'capitalize'  }}>
                     {category}
+                </Typography>
+                <Typography sx={{ mb: 1.5, fontSize: 16, color: 'black', fontWeight: 600, textTransform: 'capitalize'  }}>
+                    status:{status}
                 </Typography>
                 <Typography variant="body2" sx={{ fontSize: 14, color: palette.text.primary, lineHeight: 1.6 }}>
                     <span style={{ fontWeight: 'bold', color: palette.primary.dark }}>Description:</span> {description ? description.split(" ").slice(0, 15).join(" ") + "..." : ""}

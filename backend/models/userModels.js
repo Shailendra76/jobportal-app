@@ -36,7 +36,7 @@ const jobsHistorySchema = new mongoose.Schema({
     },
     jobId: {
         type: ObjectId,
-        
+        ref: "Job",
         required: true
     },
    

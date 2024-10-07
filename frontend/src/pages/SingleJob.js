@@ -27,7 +27,9 @@ const SingleJob = () => {
             title: singleJob && singleJob.title,
             description: singleJob && singleJob.description,
             salary: singleJob && singleJob.salary,
-            location: singleJob && singleJob.location
+            location: singleJob && singleJob.location,
+            jobId: singleJob && singleJob._id,
+            expiryDate:singleJob && singleJob.expiryDate,
         }))
     }
 
@@ -66,6 +68,9 @@ const SingleJob = () => {
                                                 <Typography variant="body2" sx={{ pt: 2 }}>
                                                     {/* <h3>Job description:</h3> */}
                                                     {singleJob && singleJob.description}
+                                                </Typography>
+                                                <Typography variant="body2">
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Expiry</Box>: {singleJob && singleJob.expiryDate}
                                                 </Typography>
                                             </CardContent>
                                         </Card>

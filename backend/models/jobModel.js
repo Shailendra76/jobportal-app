@@ -39,9 +39,18 @@ const jobSchema = new mongoose.Schema({
         ref:"User",
         required:true
        },
+       expiryDate: {
+        type: Date,
+        required: true,
+    },
  
 
   
 
 },{timestamps:true})
  module.exports= mongoose.model("Job",jobSchema);
+ jobSchema.statics.removeExpiredJobs = async function () {
+    const now = new Date();
+    const result = await this.deleteMany({ expiryDate: { $lt: now } });
+    return result;
+};

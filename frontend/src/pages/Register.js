@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import { userSignUpAction } from '../redux/actions/userAction';
 import { Link } from 'react-router-dom';
 import registerimg from '../images/register.jpg';
-
+import {  useMediaQuery } from '@mui/material';
+ // Detect screen size
 const validationSchema = yup.object({
     firstName: yup
         .string('Enter your First Name')
@@ -51,48 +52,49 @@ const Register = () => {
         // Logic for Google Sign-Up
         window.location.href = '/auth/google'; // Example redirect, adjust based on your setup
     };
+    const isSmallScreen = useMediaQuery('(max-width:600px)');
 
     return (
         <>
             <Navbar />
             <Box
-                sx={{
-                    minHeight: 'calc(100vh - 140px)',
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    bgcolor: "#e3f2fd",
-                    backgroundImage:`url(${registerimg})`,
-                    backgroundPositionX:-201,
-                    backgroundPositionY:-172,
-                    backgroundSize:'cover',
-                    overflow: 'hidden',
-                    position:'relative',
-                
-                    padding: 2
-                }}
-            >
-                <Box
-                    component="form"
-                    onSubmit={formik.handleSubmit}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent:'center',
-                        width: { xs: "66%", sm: "48%" ,md:"25%"},
-                        p: 4,
-                        bgcolor: 'white',
-                        borderRadius: 4,
-                        boxShadow: 5,
-                        overflow: 'hidden',
-                        position:'relative',
-                        left:'20%',
-                        right:'80%',
-                        border: '2px solid #d1c4e9'
-                    }}
-                >
+      sx={{
+        minHeight: 'calc(100vh - 140px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: 'white',
+        backgroundImage: isSmallScreen ? 'none' : `url(${registerimg})`,  // Remove background on small screens
+        backgroundPositionX: 100,
+        backgroundPositionY: -103,
+        backgroundRepeat: 'no-repeat',
+        overflow: 'hidden',
+        position: 'relative',
+        backgroundSize: '800px 800px',
+        padding: 2,
+      }}
+    >
+      <Box
+        component="form"
+        onSubmit={formik.handleSubmit}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: { xs: '66%', sm: '48%', md: '25%' },
+          p: 4,
+          bgcolor: 'white',
+          borderRadius: 4,
+          boxShadow: 5,
+          overflow: 'hidden',
+          position: 'relative',
+          left: isSmallScreen ? '0' : '35%',  // Center form on small screens
+          right: isSmallScreen ? '0' : '80%',  // Adjust form position
+          border: '2px solid #d1c4e9',
+        }}
+      >
                     <Box
                         sx={{
                             position: 'absolute',

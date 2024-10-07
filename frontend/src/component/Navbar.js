@@ -35,13 +35,7 @@ const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    const logOutUser = () => {
-        dispatch(userLogoutAction());
-        setTimeout(() => {
-            navigate('/');
-        }, 500);
-    };
-
+   
     const handlePageClick = (page) => {
         switch (page) {
             case 'Home':
@@ -53,12 +47,22 @@ const Navbar = () => {
             case 'Register':
                 navigate('/register');
                 break;
+            case 'Log Out':
+                navigate('/logout');
+                break;
             default:
                 break;
         }
     };
 
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+    const logOut = () => {
+        dispatch(userLogoutAction());
+        window.location.reload(true);
+        setTimeout(() => {
+            navigate('/');
+        }, 500)
+    }
 
     return (
         <AppBar position="sticky" sx={{ bgcolor:'#a491a7',height:'70px',paddingTop:'1px'}}>
@@ -186,8 +190,8 @@ const Navbar = () => {
                                 <MenuItem onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} to="/login">Log In</Link></Typography>
                                 </MenuItem> :
-                                <MenuItem onClick={logOutUser}>
-                                    <Typography style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} textAlign="center">Log Out</Typography>
+                                <MenuItem onClick={logOut}>
+                                    <Typography textAlign="center"><Link style={{ textDecoration: "none",fontWeight: 'bold', color: palette.secondary.filt1 }} >Log Out</Link></Typography>
                                 </MenuItem>
                             }
                         </Menu>

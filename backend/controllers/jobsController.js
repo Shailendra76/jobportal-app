@@ -11,7 +11,8 @@ exports.createJob = async (req, res, next) => {
             salary: req.body.salary,
             location: req.body.location,
             jobType: req.body.jobType,
-            user: req.user.id
+            user: req.user.id,
+            expiryDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         });
         res.status(201).json({
             success: true,

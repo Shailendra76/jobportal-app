@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSignInAction } from '../redux/actions/userAction';
 import { useNavigate } from 'react-router-dom';
 import loginlogo from '../images/user.png'
+const base_url="https://jobportal-app-1.onrender.com"
 
 const validationSchema = yup.object({
     email: yup
@@ -150,16 +151,16 @@ const LogIn = () => {
 
                     {/* Optional Social Login (similar to original design) */}
                     <Box sx={{ mt: 3, display: 'flex', justifyContent: 'space-between' }}>
-                        <Button
-                            sx={{
-                                bgcolor: 'rgba(255,255,255,0.27)',
-                                color: '#eaf0fb',
-                                ':hover': { bgcolor: 'rgba(255,255,255,0.47)' },
-                            }}
-                            startIcon={<i className="fab fa-google" />}
-                        >
-                            Google
-                        </Button>
+                    <Button
+        sx={{
+            bgcolor: 'rgba(255,255,255,0.27)',
+            color: '#eaf0fb',
+            ':hover': { bgcolor: 'rgba(255,255,255,0.47)' },
+        }}
+        startIcon={<i className="fab fa-google" />}
+    >
+        Google
+    </Button>
                         <Button
                             sx={{
                                 bgcolor: 'rgba(255,255,255,0.27)',
