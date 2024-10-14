@@ -90,8 +90,8 @@ exports.createUserJobsHistory = async (req, res, next) => {
                 user: req.user._id,
                 jobId
             }
-            // currentUser.jobsHistory.push(addJobHistory);
-            // await currentUser.save();
+             currentUser.jobsHistory.push(addJobHistory);
+             await currentUser.save();
             // await JobApplication.create({
             //     user: req.user._id,
             //     job: addJobHistory._id, // Assuming you have job ID from the job model
